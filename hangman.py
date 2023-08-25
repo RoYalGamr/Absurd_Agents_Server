@@ -1,9 +1,10 @@
 import random
-from words import word_list
+from words import hangman_word_list
+hangman_word_list_local = hangman_word_list
 
 
 def get_word():
-    word = random.choice(word_list)
+    word = random.choice(hangman_word_list_local)
     return word.upper()
 
 
