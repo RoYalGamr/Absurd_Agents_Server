@@ -34,7 +34,7 @@ def handle_client(client_socket, client_address):
 # Call the function to process player input and generate responses
 def process_game_input(input_data,client_socket):
     if input_data.lower() == "w":
-        wordle.wordlegame(client_socket)
+        wordle.main(client_socket)
     if input_data.lower() == "h":
         hangman.main(client_socket)
         

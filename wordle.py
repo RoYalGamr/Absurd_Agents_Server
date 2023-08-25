@@ -1,87 +1,64 @@
-from rich.prompt import Prompt
-from rich.console import Console
-from random import choice
+import random
 from words import word_list
-import socket
 
-SQUARES = {
-    'correct_place': '🟩',
-    'correct_letter': '🟨',
-    'incorrect_letter': '⬛'
-}
+def get_word():
+    word = random.choice(word_list)
+    return word.upper()
 
-WELCOME_MESSAGE = f'\n[white on blue] WELCOME TO WORDLE [/]\n'
-PLAYER_INSTRUCTIONS = "You may start guessing\n"
-GUESS_STATEMENT = "\nEnter your guess"
-ALLOWED_GUESSES = 6
-
-def correct_place(letter):
-    return f'[black on green]{letter}[/]'
+instructions = """Wordle is a single player game 
+A player has to guess a five letter hidden word 
+You have six attempts 
+Your Progress Guide "$XX$?"  
+"$" Indicates that the letter at that position was guessed correctly 
+"?" indicates that the letter at that position is in the hidden word, but in a different position 
+"X" indicates that the letter at that position is wrong, and isn't in the hidden word"""
 
 
-def correct_letter(letter):
-    return f'[black on yellow]{letter}[/]'
 
-
-def incorrect_letter(letter):
-    return f'[black on white]{letter}[/]'
-
-
-def check_guess(guess, answer):
-    guessed = []
-    wordle_pattern = []
-    for i, letter in enumerate(guess):
-        if answer[i] == guess[i]:
-            guessed += correct_place(letter)
-            wordle_pattern.append(SQUARES['correct_place'])
-        elif letter in answer:
-            guessed += correct_letter(letter)
-            wordle_pattern.append(SQUARES['correct_letter'])
+def play(word,client_socket):
+    client_socket.send(instructions.encode())
+    hidden_word = word
+    attempt = 6
+    while attempt > 0:
+        # guess = str(input("Guess the word: "))
+        client_socket.send(b"Guess the word: ")
+        guess = client_socket.recv(6).decode().strip("\n").upper()
+        if guess == hidden_word:
+            client_socket.send("You guessed the words correctly! WIN \n".encode())
+            break
         else:
-            guessed += incorrect_letter(letter)
-            wordle_pattern.append(SQUARES['incorrect_letter'])
-    return ''.join(guessed), ''.join(wordle_pattern)
+            attempt = attempt - 1
+            client_socket.send(f"you have {attempt} attempt(s) ,, \n".encode())
+            progress = ""
+            for char, word in zip(hidden_word, guess):
+                if word in hidden_word and word in char:
+                    #  client_socket.send(f"{word} $ \n".encode())
+                    progress += "$"
 
+                elif word in hidden_word:
+                    # client_socket.send(f"{word} ? \n".encode())
+                    progress += "?"
+                else:
+                    # client_socket.send(f"{word} X \n".encode())
+                    progress += "X"
+            client_socket.send(f"{guess}\n".encode())
+            client_socket.send(f"{progress}\n".encode())
+    if attempt == 0:
+        client_socket.send(b" Game over !!!! \n")
 
-def game(console, chosen_word,client_socket):
-    end_of_game = False
-    already_guessed = []
-    full_wordle_pattern = []
-    all_words_guessed = []
+def askplayagain(client_socket):
+    client_socket.send(b"Play Again? (Y/N):\n>")
+    reply = client_socket.recv(2).decode().strip("\n").upper()
+    return reply
 
-    while not end_of_game:
-        guess = Prompt.ask(GUESS_STATEMENT).upper()
+def main(client_socket):
+    word = get_word()
+    play(word,client_socket)
+    ans = askplayagain(client_socket)
+    while (ans == "Y"):
+        word = get_word()
+        play(word,client_socket)
+        ans = askplayagain(client_socket)
 
-        while len(guess) != 5 or guess in already_guessed:
-            if guess in already_guessed:
-                console.print("[red]You've already guessed this word!!\n[/]")
-            else:
-                console.print('[red]Please enter a 5-letter word!!\n[/]')
-            guess = Prompt.ask(GUESS_STATEMENT).upper()
-        already_guessed.append(guess)
-        guessed, pattern = check_guess(guess, chosen_word)
-        all_words_guessed.append(guessed)
-        full_wordle_pattern.append(pattern)
-
-        console.print(*all_words_guessed, sep="\n")
-        if guess == chosen_word or len(already_guessed) == ALLOWED_GUESSES:
-            end_of_game = True
-    if len(already_guessed) == ALLOWED_GUESSES and guess != chosen_word:
-        console.print(f"\n[red]WORDLE X/{ALLOWED_GUESSES}[/]")
-        console.print(f'\n[green]Correct Word: {chosen_word}[/]')
-    else:
-        console.print(f"\n[green]WORDLE {len(already_guessed)}/{ALLOWED_GUESSES}[/]\n")
-    console.print(*full_wordle_pattern, sep="\n")
-
-
-def wordlegame(client_socket):
-    console = Console(record=True)
-    chosen_word = choice(word_list)
-
-    plain_welcome_message = console.render(WELCOME_MESSAGE).export_text()
-    client_socket.send(plain_welcome_message.encode())
-
-    plain_welcome_message = console.render(PLAYER_INSTRUCTIONS).export_text()
-    client_socket.send(plain_welcome_message.encode())
-
-    game(console, chosen_word,client_socket)
+if __name__ == "__main__":
+    main()
