@@ -26,12 +26,10 @@ def handle_client(client_socket, client_address):
             break
 
         # Process player input and send responses
-        process_game_input(data,client_socket)  # Implement this function
-        # client_socket.send(response.encode())
+        process_game_input(data,client_socket) 
     client_socket.close()
 
 
-# Call the function to process player input and generate responses
 def process_game_input(input_data,client_socket):
     if input_data.lower() == "w":
         wordle.main(client_socket)
@@ -39,7 +37,6 @@ def process_game_input(input_data,client_socket):
         hangman.main(client_socket)
         
 
-    # return "Response to player input\n"
 
 while True:
     client_socket, client_address = server_socket.accept()

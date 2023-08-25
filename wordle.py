@@ -44,7 +44,7 @@ def play(word,client_socket):
             client_socket.send(f"{guess}\n".encode())
             client_socket.send(f"{progress}\n".encode())
     if attempt == 0:
-        client_socket.send(b" Game over !!!! \n")
+        client_socket.send(f"Sorry, you ran out of tries. The word was {hidden_word}. Maybe next time!\n".encode())
 
 def askplayagain(client_socket):
     client_socket.send(b"Play Again? (Y/N):\n>")
