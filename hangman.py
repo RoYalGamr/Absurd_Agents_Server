@@ -15,8 +15,8 @@ def play(word,client_socket):
     guessed_words = []
     tries = 6
     client_socket.send(b"Let's play Hangman!\n")
-    client_socket.send(display_hangman(tries).encode())
-    client_socket.send(word_completion.encode())
+    client_socket.send(f"{display_hangman(tries)}\n".encode())
+    client_socket.send(f"guess the word: {word_completion}".encode())
     client_socket.send(b"\n")
     while not guessed and tries > 0:
         client_socket.send(b"Please guess a letter or word: ")
@@ -50,8 +50,8 @@ def play(word,client_socket):
                 word_completion = word
         else:
             client_socket.send(b"Not a valid guess.\n")
-        client_socket.send(display_hangman(tries).encode())
-        client_socket.send(word_completion.encode())
+        client_socket.send(f"{display_hangman(tries)}\n".encode())
+        client_socket.send(f"guess the word: {word_completion}".encode())
         client_socket.send(b"\n")
     if guessed:
         client_socket.send(b"Congrats, you guessed the word! You win!\n")
@@ -68,8 +68,7 @@ def display_hangman(tries):
                    |     \\|/
                    |      |
                    |     / \\
-                   -
-                """,
+                   -""",
                 # head, torso, both arms, and one leg
                 """
                    --------
@@ -78,8 +77,7 @@ def display_hangman(tries):
                    |     \\|/
                    |      |
                    |     / 
-                   -
-                """,
+                   -""",
                 # head, torso, and both arms
                 """
                    --------
@@ -88,8 +86,7 @@ def display_hangman(tries):
                    |     \\|/
                    |      |
                    |      
-                   -
-                """,
+                   -""",
                 # head, torso, and one arm
                 """
                    --------
@@ -98,8 +95,7 @@ def display_hangman(tries):
                    |     \\|
                    |      |
                    |     
-                   -
-                """,
+                   -""",
                 # head and torso
                 """
                    --------
@@ -108,8 +104,7 @@ def display_hangman(tries):
                    |      |
                    |      |
                    |     
-                   -
-                """,
+                   -""",
                 # head
                 """
                    --------
@@ -118,8 +113,7 @@ def display_hangman(tries):
                    |    
                    |      
                    |     
-                   -
-                """,
+                   -""",
                 # initial empty state
                 """
                    --------
@@ -128,8 +122,7 @@ def display_hangman(tries):
                    |    
                    |      
                    |     
-                   -
-                """
+                   -"""
     ]
     return stages[tries]
 

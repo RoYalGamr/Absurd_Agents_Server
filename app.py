@@ -5,7 +5,7 @@ import hangman
 
 
 # Server setup
-SERVER_HOST = '172.23.12.209'  # Listen on all available network interfaces
+SERVER_HOST = '0.0.0.0'  # Listen on all available network interfaces
 SERVER_PORT = 12345
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
