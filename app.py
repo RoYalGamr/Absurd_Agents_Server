@@ -2,6 +2,7 @@ import socket
 import threading
 import wordle
 import hangman
+import schrodinger
 
 
 # Server setup
@@ -13,7 +14,7 @@ server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(5)  # Listen for up to 5 incoming connections
 print(f"Server listening on {SERVER_HOST}:{SERVER_PORT}")
 
-Instruction = b"Welcome to the server.\n For playing Wordle press W \n For playing Hangman press H \n For exit press Q \n>"
+Instruction = b"Welcome to the server.\n For playing Wordle press W \n For playing Hangman press H \n For playing Schrodinger's Cat press S \n For exit press Q \n>"
 
 # Handle client 
 def handle_client(client_socket, client_address):
@@ -35,6 +36,8 @@ def process_game_input(input_data,client_socket):
         wordle.main(client_socket)
     if input_data.lower() == "h":
         hangman.main(client_socket)
+    if input_data.lower() == "s":
+        schrodinger.main(client_socket)
         
 
 
