@@ -10,6 +10,7 @@ COPY hangman.py /app/
 COPY wordle.py /app/
 COPY evilwordle.py /app/
 COPY words.py /app/
+COPY schrodinger.py /app/
 
 # Expose the port your server is listening on
 EXPOSE 12345
