@@ -2,8 +2,9 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-## The Game Server
-The games in the service :
+## Description
+Welcome to our versatile game server that offers a collection of word-based games, including Wordle, Hangman, and their exciting variants. Whether you're a word enthusiast, a strategic thinker, or simply seeking engaging challenges, our server has something for everyone.
+The games which are in our service :
 - Wordle &ndash; Wordle is .....
 
 
