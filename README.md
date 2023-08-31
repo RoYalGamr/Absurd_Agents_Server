@@ -4,6 +4,7 @@
 
 ## Description
 Welcome to our versatile game server that offers a collection of word-based games, including Wordle, Hangman, and their exciting variants. Whether you're a word enthusiast, a strategic thinker, or simply seeking engaging challenges, our server has something for everyone.
+
 The games which are in our service :
 - Wordle &ndash; Wordle is .....
 
@@ -35,6 +36,7 @@ docker buildx build . -t servername
 ```
 
 ### For running the server
+> We have provided the dictionary feature , just change the files in `dictionary` folder and run the server . Dont rename the files .
 
 For Linux terminal
 ```bash
