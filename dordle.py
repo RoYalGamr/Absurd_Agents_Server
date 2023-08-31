@@ -11,7 +11,7 @@ instructions = """----------------------------
 ----------------------------
 Dordle is a single player game
 A player has to guess a 2 five letter hidden word with same guess
-You have seven attempts 
+You have 8 attempts 
 Your Progress Guide looks like this "$XX$? | XX$?$"  
 "$" Indicates that the letter at that position was guessed correctly 
 "?" indicates that the letter at that position is in the hidden word, but in a different position 
@@ -27,7 +27,7 @@ def play(client_socket):
     print(hidden_word2)
     is_solved1 = False
     is_solved2 = False
-    attempt = 7
+    attempt = 8
     while attempt > 0:
         client_socket.send(b"Guess the word: ")
         guess = client_socket.recv(6).decode().strip("\n").upper()
