@@ -6,26 +6,36 @@
 
 ## Usage
 
+Git clone the repository 
+```bash
+git clone https://github.com/Ritvik25goyal/Absurd_Agents_Server.git
+```
+change the working directory to the server
+```
+cd Absurd_Agents_Server
+```
+
+
 ### building Docker file
 
 For Linux Terminal
-```docker
-docker build path/to/Dockerfile -t servername
+```bash
+docker build . -t servername
 ```
 
 For Windows (Powershell)
-```docker
-docker buildx build path/to/Dockerfile -t servername
+```bash
+docker buildx . -t servername
 ```
 
 ### For running the server
 
 For Linux terminal
-```docker
+```bash
 docker run -p 12345:12345 -v $(pwd)/dictionaries:/app/dictionaries servername
 ```
 
 For Windows (Powershell)
-```docker
+```bash
 docker run -p 12345:12345 -v ${PWD}\dictionaries:/app/dictionaries servername
 ```
