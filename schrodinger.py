@@ -26,15 +26,19 @@ def play_game(client_socket):
     original_location[starting_position] = "X"
     victory = False
     client_socket.send(b"Let's play Schrodinger's Cat \n")
+    display = b"_ _ _ _ _ \n"
 
     while not victory:
-        # client_socket.send(display_array.encode())
+        client_socket.send(b"Guess the position: ")
+        client_socket.send(display)
         location = original_location.index("X")
-        client_socket.send(b"Please guess a position \n")
+        client_socket.send(b"Please guess a position: ")
         choice = int(client_socket.recv(10).decode().strip("\n"))
         if choice-1 == location:
+
             client_socket.send(b"You found the cat \n")
-            # client_socket.send(original_location.encode())
+            client_socket.send(b"Cat's position: ")
+            client_socket.send((" ".join(original_location) + "\n").encode())
             victory = True
         else:
             client_socket.send(b"Cat was not in this box \n")
