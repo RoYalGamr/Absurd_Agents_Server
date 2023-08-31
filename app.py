@@ -4,6 +4,7 @@ import wordle
 import hangman
 import schrodinger
 import evilwordle
+import dordle
 
 
 # Server setup
@@ -15,7 +16,7 @@ server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(5)  # Listen for up to 5 incoming connections
 print(f"Server listening on {SERVER_HOST}:{SERVER_PORT}")
 
-Instruction = b"Welcome to the server.\n For playing Wordle press W \n For playing Hangman press H \n For playing Evil Wordle press E \n For playing Schrodinger's Cat press S \n For exit press Q \n>"
+Instruction = b"Welcome to the server.\nFor playing Wordle press W \nFor playing Hangman press H \nFor playing Evil Wordle press E \nFor playing Dordle press D \nFor playing Schrodinger's Cat press S \nFor exit press Q \n>"
 
 
 # Handle client 
@@ -42,6 +43,8 @@ def process_game_input(input_data,client_socket):
         schrodinger.main(client_socket)
     if input_data.lower() == "e":
         evilwordle.main(client_socket)
+    if input_data.lower() == "d":
+        dordle.main(client_socket)
         
 
 

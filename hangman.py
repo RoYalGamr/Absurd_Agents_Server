@@ -13,7 +13,7 @@ def play(word,client_socket):
     guessed = False
     guessed_letters = []
     guessed_words = []
-    tries = 6
+    tries = 7
     client_socket.send(b"Let's play Hangman!\n")
     client_socket.send(f"{display_hangman(tries)}\n".encode())
     client_socket.send(f"guess the word: {word_completion}".encode())
@@ -114,10 +114,19 @@ def display_hangman(tries):
                    |      
                    |     
                    -""",
-                # initial empty state
+                # rope
                 """
                    --------
                    |      |
+                   |      
+                   |    
+                   |      
+                   |     
+                   -""",
+                # initial empty state
+                """
+                   --------
+                   |      
                    |      
                    |    
                    |      

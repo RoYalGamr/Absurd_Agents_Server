@@ -3,7 +3,10 @@ from collections import Counter
 from words import wordle_word_list
 wordle_word_list_local = wordle_word_list
 
-instructions = """Evil Wordle is a single player game 
+instructions = """----------------------------
+        Evil Wordle
+----------------------------
+Evil Wordle is a single player game 
 A player has to guess a five letter hidden word
 Try your best !!!
 Your Progress Guide "$XX$?"  

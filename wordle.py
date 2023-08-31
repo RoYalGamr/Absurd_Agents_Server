@@ -6,7 +6,10 @@ def get_word():
     word = random.choice(wordle_word_list_local)
     return word.upper()
 
-instructions = """Wordle is a single player game 
+instructions = """----------------------------
+        Wordle
+----------------------------
+Wordle is a single player game 
 A player has to guess a five letter hidden word 
 You have six attempts 
 Your Progress Guide "$XX$?"  
