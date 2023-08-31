@@ -1,9 +1,13 @@
 import random
 
 
-instructions = b"""
+instructions = b"""----------------------------
+        Schrodinger's Cat
+----------------------------
+Here a Schrodinger's cat riddle for you 
 
-"""
+it's a pretty simple game just you have to guess the box in which the cat hidden among the 5 boxes if you guess correctly you win if you don't the cat moves to its adjacent box (for ex:- if the cat in box 2 then it either moves to box 1 or box 3 ) so now you have understood the rules lets start the game\n"""
+
 def pick_location(original_location):
     location = original_location.index('X')
     new_location = ['_', '_', '_', '_', '_']
@@ -25,7 +29,7 @@ def play_game(client_socket):
     original_location = ['_', '_', '_', '_','_' ]
     original_location[starting_position] = "X"
     victory = False
-    client_socket.send(b"Let's play Schrodinger's Cat \n")
+    client_socket.send(instructions)
     display = b"_ _ _ _ _ \n"
 
     while not victory:
