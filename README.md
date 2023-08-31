@@ -11,9 +11,10 @@ Wordle is a word puzzle game where players have to guess a hidden five-letter wo
 - Schrödinger’s cat &ndash;It’s a pretty simple game just you have to guess the box in which the cat hidden among the 5 boxes if you guess correctly you win if you don’t the cat moves to its adjacent box (for ex: - if the cat in box 2 then it either moves into the box 1 or box 3). This game increases your intellect and very fun just like a Rubic's cube
 - Hangman &ndash;Hangman is a word guessing game. Where system generates a random word and the user tries to guess it by suggesting letters. If the letter is in the word, the user reveals the correct letters in the word. If the letter is not in the word, the player draws a part of a hanged man
 - Dordle &ndash;Doddle is a word guessing game that is similar to Wordle, but with a twist. In Dordle, you have to guess two words at the same time, each with five letters. You have seven guesses total, and the letters you guess are used to eliminate letters from both words. To make a guess, type in a five-letter word and press enter. Doddle is a challenging but rewarding game that can help you improve your vocabulary
-- Evilwordle &ndash;Evil Wordle is a word guessing game that is similar to Wordle, but with a twist. In Evil Wordle, the computer is constantly changing the word it is thinking of based on your guesses.After each guess, the computer will change the word it is thinking of to include any letters that you have guessed correctly, and to exclude any letters that you have guessed incorrectly.
+- Evilwordle &ndash;Evil Wordle is a word guessing game that is similar to Wordle, but with a twist. In Evil Wordle, the computer is constantly changing the word it is thinking of based on your guesses. After each guess, the computer will change the word it is thinking of to include any letters that you have guessed correctly, and to exclude any letters that you have guessed incorrectly.
 
 
+ 
 
 
 
